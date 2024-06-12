@@ -10,7 +10,7 @@ For example, [Net Info](#net-info) and [Difficulty](#difficulty) are single data
 On the other hand, [Access Tokens](#access-tokens) is a `CRUD` like resource due to the fact that it has endpoints to list, view, edit, add and delete the corresponding resource.
 
 ## Client
-In order to have [Dependency Injection](https://en.wikipedia.org/wiki/Dependency_injection), there's an interface for the `HTTP` Client.
+In order to have [Dependency Injection](https://en.wikipedia.org/wiki/Dependency_injection), there's an [interface](blob/main/client/clientinterface.go#L7) for the `HTTP` Client.
 
 The `SDK` provides an implementation using Go's standard library.
 
