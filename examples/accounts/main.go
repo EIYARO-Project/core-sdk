@@ -12,21 +12,21 @@ import (
 func main() {
 	client := client.NewStdClient("http://localhost:9888", "")
 	api := api.NewApi(client)
-	accessTokenResource, err := api.Resource("AccessToken")
+	accountResource, err := api.Resource("Account")
 	if err != nil {
-		fmt.Printf("Error getting resource AccessToken: %s\n", err)
+		fmt.Printf("Error getting resource Account: %s\n", err)
 		os.Exit(1)
 	}
 
-	list, err := accessTokenResource.List()
+	list, err := accountResource.List()
 	if err != nil {
-		fmt.Printf("Error getting AccessToken list: %s\n", err)
+		fmt.Printf("Error getting Account list: %s\n", err)
 		os.Exit(1)
 	}
 
 	fmt.Println("List:")
 	for key, value := range list {
-		at := value.(resources.AccessToken)
-		fmt.Printf("AccessToken(%d): %s\n", key, at.StringIndent())
+		a := value.(resources.Account)
+		fmt.Printf("Account(%d): %s\n", key, a.StringIndent())
 	}
 }

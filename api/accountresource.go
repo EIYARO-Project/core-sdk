@@ -9,18 +9,18 @@ import (
 	"github.com/EIYARO-Project/core-sdk/client"
 )
 
-type AccessTokenResource struct {
+type AccountResource struct {
 	client client.ClientInterface
 }
 
-func NewAccessTokenResource(client client.ClientInterface) AccessTokenResource {
-	return AccessTokenResource{
+func NewAccountResource(client client.ClientInterface) AccountResource {
+	return AccountResource{
 		client: client,
 	}
 }
 
-func (at AccessTokenResource) List() ([]Resources, error) {
-	response, err := at.client.Get("list-access-tokens")
+func (at AccountResource) List() ([]Resources, error) {
+	response, err := at.client.Post("list-accounts", "{}")
 	if err != nil {
 		return []Resources{}, err
 	}
@@ -41,7 +41,7 @@ func (at AccessTokenResource) List() ([]Resources, error) {
 	}
 
 	if status == "success" {
-		var apiMessage APiMessageSuccessArray[resources.AccessToken]
+		var apiMessage APiMessageSuccessArray[resources.Account]
 		err := json.Unmarshal(body, &apiMessage)
 		if err != nil {
 			return nil, err

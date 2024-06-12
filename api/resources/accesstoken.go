@@ -24,7 +24,7 @@ func (at *AccessToken) MarshalIndent() ([]byte, error) {
 func (at *AccessToken) String() string {
 	j, err := at.Marshal()
 	if err != nil {
-		fmt.Printf("Error encoding NetInfo to JSON: %s", err)
+		fmt.Printf("Error encoding AccessToken to JSON: %s", err)
 	}
 
 	return string(j)
@@ -33,7 +33,7 @@ func (at *AccessToken) String() string {
 func (at *AccessToken) StringIndent() string {
 	j, err := at.MarshalIndent()
 	if err != nil {
-		fmt.Printf("Error encoding NetInfo to JSON: %s", err)
+		fmt.Printf("Error encoding AccessToken to JSON: %s", err)
 	}
 
 	return string(j)

@@ -3,7 +3,9 @@ package api
 import "github.com/EIYARO-Project/core-sdk/api/resources"
 
 type Resources interface {
-	resources.AccessToken | any
+	resources.AccessToken |
+		resources.Account |
+		any
 }
 
 type ResourceInterface[T Resources] interface {

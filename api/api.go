@@ -22,6 +22,9 @@ func (a *Api) Resource(resourceName string) (ResourceInterface[Resources], error
 	case "accesstoken":
 		result := NewAccessTokenResource(a.client)
 		return result, nil
+	case "account":
+		result := NewAccountResource(a.client)
+		return result, nil
 	default:
 		return nil, errors.New("unknown resource type")
 	}

@@ -3,7 +3,11 @@ package api
 import "github.com/EIYARO-Project/core-sdk/api/resources"
 
 type MessageData interface {
-	NetInfo | Difficulty | resources.AccessToken | any
+	NetInfo |
+		Difficulty |
+		resources.AccessToken |
+		resources.Account |
+		any
 }
 
 type APiMessageSuccessObject[T MessageData] struct {
