@@ -1,20 +1,12 @@
 package api
 
-import "encoding/json"
-
 type MessageData interface {
-	NetInfo | any
+	NetInfo | Difficulty | any
 }
 
 type APiMessageSuccess[T MessageData] struct {
 	Status string `json:"status"`
 	Data   T      `json:"data"`
-}
-
-func NewApiMessageNetInfo(data []byte) (*APiMessageSuccess[NetInfo], error) {
-	var apiMessage APiMessageSuccess[NetInfo]
-	err := json.Unmarshal(data, &apiMessage)
-	return &apiMessage, err
 }
 
 type APiMessageFail struct {

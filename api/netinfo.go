@@ -16,6 +16,12 @@ type NetInfo struct {
 	VersionInfo  VersionInfo `json:"version_info"`
 }
 
+func NewApiMessageNetInfo(data []byte) (*APiMessageSuccess[NetInfo], error) {
+	var apiMessage APiMessageSuccess[NetInfo]
+	err := json.Unmarshal(data, &apiMessage)
+	return &apiMessage, err
+}
+
 func NewNetInfo(data []byte) (*NetInfo, error) {
 	var netInfo NetInfo
 	err := json.Unmarshal(data, &netInfo)
