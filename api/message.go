@@ -1,12 +1,19 @@
 package api
 
+import "github.com/EIYARO-Project/core-sdk/api/resources"
+
 type MessageData interface {
-	NetInfo | Difficulty | any
+	NetInfo | Difficulty | resources.AccessToken | any
 }
 
-type APiMessageSuccess[T MessageData] struct {
+type APiMessageSuccessObject[T MessageData] struct {
 	Status string `json:"status"`
 	Data   T      `json:"data"`
+}
+
+type APiMessageSuccessArray[T MessageData] struct {
+	Status string `json:"status"`
+	Data   []T    `json:"data"`
 }
 
 type APiMessageFail struct {

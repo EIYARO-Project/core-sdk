@@ -36,7 +36,7 @@ func (a *Api) NetInfo() (*NetInfo, error) {
 
 	status, ok := message["status"]
 	if !ok {
-		return nil, errors.New("dif not find field status")
+		return nil, errors.New("did not find field status")
 	}
 
 	if status == "success" {
@@ -53,8 +53,8 @@ func (a *Api) NetInfo() (*NetInfo, error) {
 	}
 }
 
-func NewApiMessageNetInfo(data []byte) (*APiMessageSuccess[NetInfo], error) {
-	var apiMessage APiMessageSuccess[NetInfo]
+func NewApiMessageNetInfo(data []byte) (*APiMessageSuccessObject[NetInfo], error) {
+	var apiMessage APiMessageSuccessObject[NetInfo]
 	err := json.Unmarshal(data, &apiMessage)
 	return &apiMessage, err
 }

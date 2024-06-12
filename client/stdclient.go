@@ -5,6 +5,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 type StdClient struct {
@@ -22,14 +23,21 @@ func NewStdClient(baseURL string, accessToken string) *StdClient {
 }
 
 func (sc StdClient) Get(path string) (*http.Response, error) {
-	url, err := url.Parse(sc.baseURL)
+	URL, err := url.Parse(sc.baseURL)
 	if err != nil {
 		return nil, err
 	}
-	url.Path = path
+	URL.Path = path
+
+	if sc.accessToken != "" {
+		if strings.Contains(sc.accessToken, ":") {
+			sa := strings.SplitN(sc.accessToken, ":", 2)
+			URL.User = url.UserPassword(sa[0], sa[1])
+		}
+	}
 
 	var body io.Reader
-	request, err := http.NewRequest("GET", url.String(), body)
+	request, err := http.NewRequest("GET", URL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -45,13 +53,20 @@ func (sc StdClient) Get(path string) (*http.Response, error) {
 }
 
 func (sc StdClient) Post(path string, body string) (*http.Response, error) {
-	url, err := url.Parse(sc.baseURL)
+	URL, err := url.Parse(sc.baseURL)
 	if err != nil {
 		return nil, err
 	}
-	url.Path = path
+	URL.Path = path
 
-	request, err := http.NewRequest("POST", url.String(), bytes.NewBufferString(body))
+	if sc.accessToken != "" {
+		if strings.Contains(sc.accessToken, ":") {
+			sa := strings.SplitN(sc.accessToken, ":", 2)
+			URL.User = url.UserPassword(sa[0], sa[1])
+		}
+	}
+
+	request, err := http.NewRequest("POST", URL.String(), bytes.NewBufferString(body))
 	if err != nil {
 		return nil, err
 	}

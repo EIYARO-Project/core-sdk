@@ -36,7 +36,7 @@ func (a *Api) Difficulty(block_height uint64, block_hash string) (*Difficulty, e
 
 	status, ok := message["status"]
 	if !ok {
-		return nil, errors.New("dif not find field status")
+		return nil, errors.New("did not find field status")
 	}
 
 	if status == "success" {
@@ -53,8 +53,8 @@ func (a *Api) Difficulty(block_height uint64, block_hash string) (*Difficulty, e
 	}
 }
 
-func NewApiMessageDifficulty(data []byte) (*APiMessageSuccess[Difficulty], error) {
-	var apiMessage APiMessageSuccess[Difficulty]
+func NewApiMessageDifficulty(data []byte) (*APiMessageSuccessObject[Difficulty], error) {
+	var apiMessage APiMessageSuccessObject[Difficulty]
 	err := json.Unmarshal(data, &apiMessage)
 	return &apiMessage, err
 }
