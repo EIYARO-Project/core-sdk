@@ -5,6 +5,7 @@ import "github.com/EIYARO-Project/core-sdk/api/resources"
 type MessageData interface {
 	NetInfo |
 		Difficulty |
+		GetWorkJson |
 		resources.AccessToken |
 		resources.Account |
 		any

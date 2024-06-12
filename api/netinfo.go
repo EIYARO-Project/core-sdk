@@ -29,17 +29,12 @@ func (a *Api) NetInfo() (*NetInfo, error) {
 		return nil, err
 	}
 
-	var message map[string]interface{}
-	if err := json.Unmarshal(body, &message); err != nil {
+	success, err := isMessageSuccess(body)
+	if err != nil {
 		return nil, err
 	}
 
-	status, ok := message["status"]
-	if !ok {
-		return nil, errors.New("did not find field status")
-	}
-
-	if status == "success" {
+	if success {
 		apiMessage, err := NewApiMessageNetInfo(body)
 		if err != nil {
 			return nil, err
