@@ -17,11 +17,13 @@ func main() {
 		fmt.Printf("Error getting resource AccessToken: %s\n", err)
 		os.Exit(1)
 	}
+
 	list, err := accessTokenResource.List()
 	if err != nil {
 		fmt.Printf("Error getting AccessToken list: %s\n", err)
 		os.Exit(1)
 	}
+
 	fmt.Println("List:")
 	for key, value := range list {
 		at := value.(resources.AccessToken)

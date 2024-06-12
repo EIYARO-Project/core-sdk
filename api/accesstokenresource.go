@@ -30,24 +30,20 @@ func (at AccessTokenResource) List() ([]Resources, error) {
 		return nil, err
 	}
 
-	var message map[string]interface{}
-	if err := json.Unmarshal(body, &message); err != nil {
+	success, err := isMessageSuccess(body)
+	if err != nil {
 		return nil, err
 	}
 
-	status, ok := message["status"]
-	if !ok {
-		return nil, errors.New("did not find field status")
-	}
-
-	if status == "success" {
+	if success {
 		var apiMessage APiMessageSuccessArray[resources.AccessToken]
 		err := json.Unmarshal(body, &apiMessage)
 		if err != nil {
 			return nil, err
 		}
+
 		var result []Resources
-		for value := range apiMessage.Data {
+		for _, value := range apiMessage.Data {
 			result = append(result, value)
 		}
 		return result, nil
@@ -57,7 +53,7 @@ func (at AccessTokenResource) List() ([]Resources, error) {
 	}
 }
 
-// func (at AccessTokenResource) View() (Resources, error) {
-// 	result := AccessToken{}
-// 	return result, nil
-// }
+func (at AccessTokenResource) View(a ...string) (Resources, error) {
+	result := resources.AccessToken{}
+	return result, nil
+}
