@@ -6,5 +6,5 @@ import (
 
 type ClientInterface interface {
 	// The GET HTTP method
-	Get(endpoint string) (*http.Response, error)
+	Get(path string) (*http.Response, error)
 }

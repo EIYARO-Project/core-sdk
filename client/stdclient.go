@@ -12,12 +12,12 @@ type StdClient struct {
 	client      http.Client
 }
 
-func (sc StdClient) Get(endpoint string) (*http.Response, error) {
+func (sc StdClient) Get(path string) (*http.Response, error) {
 	url, err := url.Parse(sc.baseURL)
 	if err != nil {
 		return nil, err
 	}
-	url.Path = endpoint
+	url.Path = path
 
 	var body io.Reader
 	request, err := http.NewRequest("GET", url.String(), body)
