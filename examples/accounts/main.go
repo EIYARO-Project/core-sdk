@@ -24,18 +24,31 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Println("List:")
+	fmt.Println("List Accounts:")
+	var accountID string
+	var accountAlias string
 	for key, value := range list {
 		a := value.(resources.Account)
+		accountID = a.ID
+		accountAlias = a.Alias
 		fmt.Printf("Account(%d): %s\n", key, a.StringIndent())
 	}
 
 	fmt.Println()
-	account, err := accountResource.View("alias", "account-alias")
+	account, err := accountResource.View("id", accountID)
 	if err != nil {
 		fmt.Printf("Error getting account: %s\n", err)
 		os.Exit(1)
 	}
 	a := account.(resources.Account)
-	fmt.Printf("Account: %s\n", a.StringIndent())
+	fmt.Printf("View Account by ID: %s\n", a.StringIndent())
+
+	fmt.Println()
+	account, err = accountResource.View("alias", accountAlias)
+	if err != nil {
+		fmt.Printf("Error getting account: %s\n", err)
+		os.Exit(1)
+	}
+	a = account.(resources.Account)
+	fmt.Printf("View Account by Alias: %s\n", a.StringIndent())
 }

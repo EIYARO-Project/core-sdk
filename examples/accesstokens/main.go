@@ -24,9 +24,20 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Println("List:")
+	fmt.Println("List Access Tokens:")
+	var accessTokenID string
 	for key, value := range list {
 		at := value.(resources.AccessToken)
+		accessTokenID = at.ID
 		fmt.Printf("AccessToken(%d): %s\n", key, at.StringIndent())
 	}
+
+	fmt.Println()
+	accessToken, err := accessTokenResource.View("id", accessTokenID)
+	if err != nil {
+		fmt.Printf("Error getting access token: %s\n", err)
+		os.Exit(1)
+	}
+	at := accessToken.(resources.AccessToken)
+	fmt.Printf("View Access Token by ID: %s\n", at.StringIndent())
 }
